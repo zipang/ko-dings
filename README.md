@@ -1,11 +1,14 @@
 ko-dings
 ========
 
-Bells & Whistles for Knockout JS
+_Bells & Whistles for Knockout JS_
 
-Some ideas provided by this great post :
+Some ideas provided by this great post :  
+[10 Knockout Binding Handlers I Don't Want To Live Without](http://tech.pro/blog/1863/10-knockout-binding-handlers-i-don-t-want-to-live-without)
 
-## Current HTML attributes bindings
+Obviously.. there is more to come..
+
+## 1. Current HTML attributes bindings
 
 The following attributes bindings are added to Knockout.
 
@@ -18,10 +21,12 @@ The following attributes bindings are added to Knockout.
 * placeholder
  
 ```html
-    <img data-bind="src: mainVisual, alt: description, title: description, width: mainVisualWidth, height: mainVisualHeight">
+    <img data-bind="src: mainVisual, 
+         alt: description, title: description, 
+        width: mainVisualWidth, height: mainVisualHeight">
 ```
 
-## `className` binding
+## 2. `className` binding
 
 This new binding provides a custom syntax to bind a ViewModel attribute to a class name amongst a list of known values. 
 
