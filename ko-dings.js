@@ -1,9 +1,9 @@
 /**
- * A SET OF COOL MAPPINGS FOR KNOCKOUT.JS
+ * ko-dings: A SET OF COOL MAPPINGS FOR KNOCKOUT.JS
  * @author zipang
+ * @url https://github.com/zipang/ko-dings
  * @copyright 2014 - EIDOLON LABS
  */
-
 (function() {
 
 	if (!ko) {
@@ -45,10 +45,6 @@
 			return bindings;
 		}
 	};
-
-	$(window).on("hover", ".error", function(evt) {
-		$(this).css("border", "2px solid red");
-	});
 
 	// =============================================================
 	// Add new custom mappings for usual attributes href, src, etc..
