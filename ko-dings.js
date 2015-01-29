@@ -4,9 +4,9 @@
  * @copyright 2014 - EIDOLON LABS
  */
 
-(function() {
+(function(w, undefined) {
 
-	if (!ko) {
+	if (!w.ko) {
 		if (console) console.log("Knockout.JS not present.")
 		return;
 	}
@@ -46,7 +46,8 @@
 		}
 	};
 
-	$(window).on("hover", ".error", function(evt) {
+	// SHOW THE BINDING ERRORS
+	$(w).on("hover", ".error", function(evt) {
 		$(this).css("border", "2px solid red");
 	});
 
@@ -62,9 +63,31 @@
 			bindingHandlers[attr] = {
 				update: function (element, valueAccessor) {
 					bindingHandlers.attr.update(element, function () {
-						binding[attr] = valueAccessor();
+						binding[attr] = decodeValue(valueAccessor);
 						return binding;
 					});
+				}
+			};
+		}
+	);
+
+	bindingHandlers.backgroundImage = {
+		update: function (element, valueAccessor) {
+			$(element).css("backgroundImage", "url('"
+				+ encodeURI(decodeValue(valueAccessor))
+				+ "')");
+		}
+	};
+
+	["href", "src", "alt", "title", "width", "height", "placeholder"].forEach(
+		function def(_attr) {
+			var binding = {}, attr = _attr;
+
+			bindingHandlers["replace-var-" + attr] = {
+				update: function (element, valueAccessor) {
+					var existing = $(element).attr(attr),
+						val = decodeValue(valueAccessor);
+					$(element).attr(attr, existing.replace("?", val));
 				}
 			};
 		}
@@ -154,4 +177,4 @@
 		}
 	};
 
-})();
+})(window);
