@@ -1,6 +1,7 @@
 /**
- * A SET OF COOL MAPPINGS FOR KNOCKOUT.JS
+ * ko-dings: A SET OF COOL MAPPINGS FOR KNOCKOUT.JS
  * @author zipang
+ * @url https://github.com/zipang/ko-dings
  * @copyright 2014 - EIDOLON LABS
  */
 
@@ -46,10 +47,6 @@
 		}
 	};
 
-	// SHOW THE BINDING ERRORS
-	$(w).on("hover", ".error", function(evt) {
-		$(this).css("border", "2px solid red");
-	});
 
 	// =============================================================
 	// Add new custom mappings for usual attributes href, src, etc..
@@ -71,13 +68,6 @@
 		}
 	);
 
-	bindingHandlers.backgroundImage = {
-		update: function (element, valueAccessor) {
-			$(element).css("backgroundImage", "url('"
-				+ encodeURI(decodeValue(valueAccessor))
-				+ "')");
-		}
-	};
 
 	["href", "src", "alt", "title", "width", "height", "placeholder"].forEach(
 		function def(_attr) {
@@ -92,6 +82,19 @@
 			};
 		}
 	);
+
+	// =============================================================
+	// backgroundImage Mapping
+	// Syntaxe :
+	//   data-binding="backgroundImage: imgUrl"
+	// =============================================================
+	bindingHandlers.backgroundImage = {
+		update: function (element, valueAccessor) {
+			$(element).css("backgroundImage", "url('"
+				+ encodeURI(decodeValue(valueAccessor))
+				+ "')");
+		}
+	};
 
 	// =============================================================
 	// Custom syntax for the class attribute.. class: status[draft|created|in_process]
