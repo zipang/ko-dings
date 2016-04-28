@@ -4,9 +4,9 @@
  * @url https://github.com/zipang/ko-dings
  * @copyright 2014 - EIDOLON LABS
  */
-(function() {
+(function(w, undefined) {
 
-	if (!ko) {
+	if (!w.ko) {
 		if (console) console.log("Knockout.JS not present.")
 		return;
 	}
@@ -46,6 +46,7 @@
 		}
 	};
 
+
 	// =============================================================
 	// Add new custom mappings for usual attributes href, src, etc..
 	// =============================================================
@@ -58,13 +59,41 @@
 			bindingHandlers[attr] = {
 				update: function (element, valueAccessor) {
 					bindingHandlers.attr.update(element, function () {
-						binding[attr] = valueAccessor();
+						binding[attr] = decodeValue(valueAccessor);
 						return binding;
 					});
 				}
 			};
 		}
 	);
+
+
+	["href", "src", "alt", "title", "width", "height", "placeholder"].forEach(
+		function def(_attr) {
+			var binding = {}, attr = _attr;
+
+			bindingHandlers["replace-var-" + attr] = {
+				update: function (element, valueAccessor) {
+					var existing = $(element).attr(attr),
+						val = decodeValue(valueAccessor);
+					$(element).attr(attr, existing.replace("?", val));
+				}
+			};
+		}
+	);
+
+	// =============================================================
+	// backgroundImage Mapping
+	// Syntaxe :
+	//   data-binding="backgroundImage: imgUrl"
+	// =============================================================
+	bindingHandlers.backgroundImage = {
+		update: function (element, valueAccessor) {
+			$(element).css("backgroundImage", "url('"
+				+ encodeURI(decodeValue(valueAccessor))
+				+ "')");
+		}
+	};
 
 	// =============================================================
 	// Custom syntax for the class attribute.. class: status[draft|created|in_process]
@@ -150,4 +179,4 @@
 		}
 	};
 
-})();
+})(window);

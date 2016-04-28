@@ -46,7 +46,7 @@ In its simplest form, the binding looks for an observable or property with the s
     </div>
 ```
 
-In a slightly more sophisticated form, the binding looks for the name of the accessor betwwen the brackets after the name of the class to toggle.
+In its slightly more sophisticated form, the binding looks for the name of the accessor between the [brackets] after the name of the class to toggle.
 
 ```html
     <div class="product" data-bind="toggleClass: available[inStock]">
