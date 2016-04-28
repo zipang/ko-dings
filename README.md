@@ -34,3 +34,21 @@ This new binding provides a custom syntax to bind a ViewModel attribute to a cla
     <div class="product" data-bind="className: disponility[available|out-of-stock|pre-order]">
     </div>
 ```
+
+## 2. `toggleClass` binding
+
+An even simpler binding that toggle a simple class name on a boolean value.
+
+In its simplest form, the binding looks for an observable or property with the same name of the class that must be toggled.
+
+```html
+    <div class="product" data-bind="toggleClass: available">
+    </div>
+```
+
+In a slightly more sophisticated form, the binding looks for the name of the accessor betwwen the brackets after the name of the class to toggle.
+
+```html
+    <div class="product" data-bind="toggleClass: available[inStock]">
+    </div>
+```
